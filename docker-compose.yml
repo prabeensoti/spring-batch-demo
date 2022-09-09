@@ -1,0 +1,35 @@
+version: "3.8"
+services:
+  mysql-server:
+    container_name: mysql-server
+    image: mysql:latest
+    env_file:
+      - app.env
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      timeout: 20s
+      retries: 10
+    volumes:
+      - /var/lib/mysql:/var/lib/app/mysql
+    networks:
+      - spring-batch-network
+#    restart: on-failure
+  spring-batch-demo-server:
+    container_name: spring-batch-demo-server
+    depends_on:
+      mysql-server:
+        condition: service_healthy
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - app.env
+    ports:
+      - "8080:8080"
+    networks:
+      - spring-batch-network
+#    restart: on-failure
+networks:
+  spring-batch-network:
+    name: spring-batch-network
+    driver: bridge
