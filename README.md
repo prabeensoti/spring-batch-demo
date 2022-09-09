@@ -13,7 +13,11 @@
 
 ## Run Docker container
 ### In project folder execute command on terminal
-### `docker compose up -d` use docker compose latest one
+### `docker compose up -d`
+
+## Down Docker container
+### In project folder execute command on terminal
+### `docker compose down`
 
 # Available APIS
 #
