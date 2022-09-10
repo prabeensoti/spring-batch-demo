@@ -32,7 +32,7 @@ public class SecurityConfig{
                 .addFilterAfter(jwtTokenFilter, BasicAuthenticationFilter.class)
                 .authorizeRequests()
                 .antMatchers("/authenticate").permitAll()
-                .antMatchers("/batch/execute").fullyAuthenticated()
+                .antMatchers("/**").fullyAuthenticated()
                 .anyRequest()
                 .authenticated().and().build();
     }
