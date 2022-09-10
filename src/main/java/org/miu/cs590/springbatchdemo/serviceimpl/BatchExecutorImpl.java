@@ -1,7 +1,10 @@
 package org.miu.cs590.springbatchdemo.serviceimpl;
 
 import org.miu.cs590.springbatchdemo.service.BatchExecutor;
-import org.springframework.batch.core.*;
+import org.springframework.batch.core.Job;
+import org.springframework.batch.core.JobExecution;
+import org.springframework.batch.core.JobParameters;
+import org.springframework.batch.core.JobParametersInvalidException;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.batch.core.repository.JobExecutionAlreadyRunningException;
 import org.springframework.batch.core.repository.JobInstanceAlreadyCompleteException;
@@ -24,9 +27,9 @@ public class BatchExecutorImpl implements BatchExecutor {
 
     @Override
     public void runBatchProcess() {
-        simpleAsyncTaskExecutor.execute(()-> {
-            try{
-                JobExecution jobExecution = jobLauncher.run(job,new JobParameters());
+        simpleAsyncTaskExecutor.execute(() -> {
+            try {
+                JobExecution jobExecution = jobLauncher.run(job, new JobParameters());
             } catch (JobExecutionAlreadyRunningException | JobRestartException | JobInstanceAlreadyCompleteException |
                      JobParametersInvalidException e) {
                 throw new RuntimeException(e);
