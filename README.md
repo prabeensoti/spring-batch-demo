@@ -27,6 +27,8 @@
 ### `{"username":"admin","password":"admin"}`
 ### RESPONSE BODY:
 ### `{"token":"jwt_token"}`
+## For Admin role: `{"username":"admin","password":"admin123"}`
+## For User role: `{"username":"user","password":"user123"}`
 #
 ## Execute Batch Task
 ### GET METHOD: http://localhost:8080/batch/execute
